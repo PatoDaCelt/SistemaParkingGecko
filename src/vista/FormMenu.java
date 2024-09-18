@@ -63,6 +63,20 @@ public class FormMenu extends javax.swing.JFrame {
                   jButton_registrar = new javax.swing.JButton();
                   jLabel6 = new javax.swing.JLabel();
                   jPanel_retirar_vehiculo = new javax.swing.JPanel();
+                  jLabel10 = new javax.swing.JLabel();
+                  jLabel_info = new javax.swing.JLabel();
+                  jLabel11 = new javax.swing.JLabel();
+                  jLabel12 = new javax.swing.JLabel();
+                  jLabel13 = new javax.swing.JLabel();
+                  jLabel14 = new javax.swing.JLabel();
+                  jLabel15 = new javax.swing.JLabel();
+                  jTextField_placa_retiro = new javax.swing.JTextField();
+                  jButton_buscar_placa = new javax.swing.JButton();
+                  jButton_retirar = new javax.swing.JButton();
+                  jLabel_propietario = new javax.swing.JLabel();
+                  jLabel_hora_entrada = new javax.swing.JLabel();
+                  jLabel_hora_salida = new javax.swing.JLabel();
+                  jLabel_valor_pagar = new javax.swing.JLabel();
                   jPanel_administrar_vehiculos = new javax.swing.JPanel();
                   jLabel7 = new javax.swing.JLabel();
                   jLabel8 = new javax.swing.JLabel();
@@ -175,6 +189,87 @@ public class FormMenu extends javax.swing.JFrame {
 
                   jPanel_retirar_vehiculo.setBackground(new java.awt.Color(204, 204, 255));
                   jPanel_retirar_vehiculo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+                  jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+                  jLabel10.setForeground(new java.awt.Color(0, 51, 102));
+                  jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+                  jLabel10.setText("Retiro de Vehiculos del Parking");
+                  jPanel_retirar_vehiculo.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 30, 360, -1));
+
+                  jLabel_info.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+                  jLabel_info.setForeground(new java.awt.Color(153, 0, 0));
+                  jLabel_info.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+                  jLabel_info.setText("Vehiculo Retirado");
+                  jPanel_retirar_vehiculo.add(jLabel_info, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 60, 250, 30));
+
+                  jLabel11.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
+                  jLabel11.setForeground(new java.awt.Color(0, 51, 102));
+                  jLabel11.setText("Placa:");
+                  jPanel_retirar_vehiculo.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 90, 100, 30));
+
+                  jLabel12.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
+                  jLabel12.setForeground(new java.awt.Color(0, 51, 102));
+                  jLabel12.setText("Propietario:");
+                  jPanel_retirar_vehiculo.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 170, 150, 30));
+
+                  jLabel13.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
+                  jLabel13.setForeground(new java.awt.Color(0, 51, 102));
+                  jLabel13.setText("Hora Entrada:");
+                  jPanel_retirar_vehiculo.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 200, 150, 30));
+
+                  jLabel14.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
+                  jLabel14.setForeground(new java.awt.Color(0, 51, 102));
+                  jLabel14.setText("Hora Salida:");
+                  jPanel_retirar_vehiculo.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 230, 150, 30));
+
+                  jLabel15.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
+                  jLabel15.setForeground(new java.awt.Color(0, 51, 102));
+                  jLabel15.setText("Valor a Pagar:");
+                  jPanel_retirar_vehiculo.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 260, 150, 30));
+
+                  jTextField_placa_retiro.setBackground(new java.awt.Color(255, 255, 255));
+                  jTextField_placa_retiro.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+                  jTextField_placa_retiro.setForeground(new java.awt.Color(0, 0, 0));
+                  jTextField_placa_retiro.addActionListener(new java.awt.event.ActionListener() {
+                           public void actionPerformed(java.awt.event.ActionEvent evt) {
+                                    jTextField_placa_retiroActionPerformed(evt);
+                           }
+                  });
+                  jPanel_retirar_vehiculo.add(jTextField_placa_retiro, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 120, 140, 30));
+
+                  jButton_buscar_placa.setBackground(new java.awt.Color(0, 51, 102));
+                  jButton_buscar_placa.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+                  jButton_buscar_placa.setForeground(new java.awt.Color(255, 255, 255));
+                  jButton_buscar_placa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/lupa.png"))); // NOI18N
+                  jButton_buscar_placa.setText("BUSCAR");
+                  jPanel_retirar_vehiculo.add(jButton_buscar_placa, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 120, 140, 30));
+
+                  jButton_retirar.setBackground(new java.awt.Color(0, 51, 102));
+                  jButton_retirar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+                  jButton_retirar.setForeground(new java.awt.Color(255, 255, 255));
+                  jButton_retirar.setText("RETIRAR");
+                  jPanel_retirar_vehiculo.add(jButton_retirar, new org.netbeans.lib.awtextra.AbsoluteConstraints(175, 300, 250, 30));
+
+                  jLabel_propietario.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
+                  jLabel_propietario.setForeground(new java.awt.Color(0, 0, 0));
+                  jLabel_propietario.setText("ALGUIEN");
+                  jPanel_retirar_vehiculo.add(jLabel_propietario, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 170, 150, 30));
+
+                  jLabel_hora_entrada.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
+                  jLabel_hora_entrada.setForeground(new java.awt.Color(0, 0, 0));
+                  jLabel_hora_entrada.setText("00:00:00");
+                  jPanel_retirar_vehiculo.add(jLabel_hora_entrada, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 200, 150, 30));
+
+                  jLabel_hora_salida.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
+                  jLabel_hora_salida.setForeground(new java.awt.Color(0, 0, 0));
+                  jLabel_hora_salida.setText("00:00:00");
+                  jPanel_retirar_vehiculo.add(jLabel_hora_salida, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 230, 150, 30));
+
+                  jLabel_valor_pagar.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
+                  jLabel_valor_pagar.setForeground(new java.awt.Color(0, 0, 0));
+                  jLabel_valor_pagar.setText("$ 00.00");
+                  jPanel_retirar_vehiculo.add(jLabel_valor_pagar, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 260, 150, 30));
+
                   jTabbedPane1.addTab("Retirar Vehiculo", jPanel_retirar_vehiculo);
 
                   jPanel_administrar_vehiculos.setBackground(new java.awt.Color(204, 204, 255));
@@ -370,6 +465,10 @@ public class FormMenu extends javax.swing.JFrame {
 
          }//GEN-LAST:event_jButton_buscarActionPerformed
 
+         private void jTextField_placa_retiroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_placa_retiroActionPerformed
+                  // TODO add your handling code here:
+         }//GEN-LAST:event_jTextField_placa_retiroActionPerformed
+
          /**
           * @param args the command line arguments
           */
@@ -407,11 +506,19 @@ public class FormMenu extends javax.swing.JFrame {
 
          // Variables declaration - do not modify//GEN-BEGIN:variables
          private javax.swing.JButton jButton_buscar;
+         private javax.swing.JButton jButton_buscar_placa;
          private javax.swing.JButton jButton_cerrar_sesion;
          private javax.swing.JButton jButton_registrar;
+         private javax.swing.JButton jButton_retirar;
          private javax.swing.JComboBox<String> jComboBox_tipo_vehiculo;
          private com.toedter.calendar.JDateChooser jDateChooser_fecha_busqueda;
          private javax.swing.JLabel jLabel1;
+         private javax.swing.JLabel jLabel10;
+         private javax.swing.JLabel jLabel11;
+         private javax.swing.JLabel jLabel12;
+         private javax.swing.JLabel jLabel13;
+         private javax.swing.JLabel jLabel14;
+         private javax.swing.JLabel jLabel15;
          private javax.swing.JLabel jLabel2;
          private javax.swing.JLabel jLabel3;
          private javax.swing.JLabel jLabel4;
@@ -420,7 +527,12 @@ public class FormMenu extends javax.swing.JFrame {
          private javax.swing.JLabel jLabel7;
          private javax.swing.JLabel jLabel8;
          private javax.swing.JLabel jLabel9;
+         private javax.swing.JLabel jLabel_hora_entrada;
+         private javax.swing.JLabel jLabel_hora_salida;
+         private javax.swing.JLabel jLabel_info;
          private javax.swing.JLabel jLabel_logo;
+         private javax.swing.JLabel jLabel_propietario;
+         private javax.swing.JLabel jLabel_valor_pagar;
          private javax.swing.JPanel jPanel1;
          private javax.swing.JPanel jPanel2;
          private javax.swing.JPanel jPanel_administrar_vehiculos;
@@ -431,6 +543,7 @@ public class FormMenu extends javax.swing.JFrame {
          private javax.swing.JTable jTable_vehiculos;
          private javax.swing.JTextField jTextField_busqueda_criterio;
          private javax.swing.JTextField jTextField_placa;
+         private javax.swing.JTextField jTextField_placa_retiro;
          private javax.swing.JTextField jTextField_propietario;
          // End of variables declaration//GEN-END:variables
 
