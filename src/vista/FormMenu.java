@@ -11,7 +11,10 @@ import java.util.Date;
 import javax.swing.JOptionPane;
 import modelo.Vehiculo;
 import java.sql.*;
+import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
@@ -22,6 +25,7 @@ import javax.swing.table.DefaultTableModel;
 public class FormMenu extends javax.swing.JFrame {
 
          private int idVehiculo = 0;
+         private double valorAPagar = 0.0;
 
          /**
           * Creates new form FormMenu
@@ -32,6 +36,8 @@ public class FormMenu extends javax.swing.JFrame {
                   this.setLocationRelativeTo(null);
                   this.setResizable(false);
                   this.setTitle("Sistema Parcking Gecko");
+
+                  jLabel_info.setVisible(false);
 
                   //Cargar la tabla
                   this.CargarTablaVehiculos();
@@ -151,6 +157,11 @@ public class FormMenu extends javax.swing.JFrame {
                   jTextField_placa.setBackground(new java.awt.Color(255, 255, 255));
                   jTextField_placa.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
                   jTextField_placa.setForeground(new java.awt.Color(0, 0, 0));
+                  jTextField_placa.addActionListener(new java.awt.event.ActionListener() {
+                           public void actionPerformed(java.awt.event.ActionEvent evt) {
+                                    jTextField_placaActionPerformed(evt);
+                           }
+                  });
                   jTextField_placa.addKeyListener(new java.awt.event.KeyAdapter() {
                            public void keyPressed(java.awt.event.KeyEvent evt) {
                                     jTextField_placaKeyPressed(evt);
@@ -161,6 +172,11 @@ public class FormMenu extends javax.swing.JFrame {
                   jTextField_propietario.setBackground(new java.awt.Color(255, 255, 255));
                   jTextField_propietario.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
                   jTextField_propietario.setForeground(new java.awt.Color(0, 0, 0));
+                  jTextField_propietario.addActionListener(new java.awt.event.ActionListener() {
+                           public void actionPerformed(java.awt.event.ActionEvent evt) {
+                                    jTextField_propietarioActionPerformed(evt);
+                           }
+                  });
                   jPanel_registrar_vehiculo.add(jTextField_propietario, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 140, 230, 30));
 
                   jComboBox_tipo_vehiculo.setBackground(new java.awt.Color(255, 255, 255));
@@ -235,6 +251,11 @@ public class FormMenu extends javax.swing.JFrame {
                                     jTextField_placa_retiroActionPerformed(evt);
                            }
                   });
+                  jTextField_placa_retiro.addKeyListener(new java.awt.event.KeyAdapter() {
+                           public void keyPressed(java.awt.event.KeyEvent evt) {
+                                    jTextField_placa_retiroKeyPressed(evt);
+                           }
+                  });
                   jPanel_retirar_vehiculo.add(jTextField_placa_retiro, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 120, 140, 30));
 
                   jButton_buscar_placa.setBackground(new java.awt.Color(0, 51, 102));
@@ -242,6 +263,11 @@ public class FormMenu extends javax.swing.JFrame {
                   jButton_buscar_placa.setForeground(new java.awt.Color(255, 255, 255));
                   jButton_buscar_placa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/lupa.png"))); // NOI18N
                   jButton_buscar_placa.setText("BUSCAR");
+                  jButton_buscar_placa.addActionListener(new java.awt.event.ActionListener() {
+                           public void actionPerformed(java.awt.event.ActionEvent evt) {
+                                    jButton_buscar_placaActionPerformed(evt);
+                           }
+                  });
                   jPanel_retirar_vehiculo.add(jButton_buscar_placa, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 120, 140, 30));
 
                   jButton_retirar.setBackground(new java.awt.Color(0, 51, 102));
@@ -469,6 +495,25 @@ public class FormMenu extends javax.swing.JFrame {
                   // TODO add your handling code here:
          }//GEN-LAST:event_jTextField_placa_retiroActionPerformed
 
+         private void jButton_buscar_placaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_buscar_placaActionPerformed
+                  //Llamada del método para que el boton realice la accion
+                  this.BuscarPlaca();
+         }//GEN-LAST:event_jButton_buscar_placaActionPerformed
+
+         private void jTextField_placaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_placaActionPerformed
+                  // TODO add your handling code here:
+         }//GEN-LAST:event_jTextField_placaActionPerformed
+
+         private void jTextField_propietarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_propietarioActionPerformed
+                  // TODO add your handling code here:
+         }//GEN-LAST:event_jTextField_propietarioActionPerformed
+
+         private void jTextField_placa_retiroKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField_placa_retiroKeyPressed
+                  if ( evt.getKeyCode() == evt.VK_ENTER ) {
+                          this.BuscarPlaca();
+                  }
+         }//GEN-LAST:event_jTextField_placa_retiroKeyPressed
+
          /**
           * @param args the command line arguments
           */
@@ -617,4 +662,85 @@ public class FormMenu extends javax.swing.JFrame {
                   }
          }
 
+         //Metodo para buscar placa
+         private void BuscarPlaca(){
+                  String placaBuscar = jTextField_placa_retiro.getText().trim();
+                  String estado = "";
+                  String salida = "";
+                  double valor = 0;
+
+                  if ( placaBuscar.isEmpty() ) {
+                           JOptionPane.showMessageDialog(null, "Ingresar una Placa");
+                  } else {
+                           Connection cn = Conexion.conectar();
+                           String sql = "select * from tb_vehiculo where placa = '" + placaBuscar + "'";
+                           Statement st;
+
+                           DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                           Calendar calendar = Calendar.getInstance();
+                           Date date = calendar.getTime();
+
+                           try {
+                                    st = cn.createStatement();
+                                    ResultSet rs = st.executeQuery(sql);
+
+                                    if ( rs.next() ) {
+                                             idVehiculo = rs.getInt("id_vehiculo");
+                                             jLabel_propietario.setText(rs.getString("propietario"));
+                                             jLabel_hora_entrada.setText(rs.getString("hora_entrada"));
+                                             salida = rs.getString("hora_salida");
+                                             valor = rs.getDouble("valor_pagado");
+                                             estado = rs.getString("estado");
+
+                                             //Fecha y hora de entrada
+                                             String tiempoIngresado = rs.getString("hora_entrada");
+                                             Date tiempo = dateFormat.parse(tiempoIngresado);
+                                             int minutosACobrar = ( int ) ( date.getTime() - tiempo.getTime() ) / 60000;
+
+                                             if ( rs.getString("tipo_vehiculo").equals("Automóvil") ) {
+                                                      if ( minutosACobrar < 60 ) {
+                                                               valorAPagar = 10; //Precio a pagar antes de 1 hora
+                                                      } else {
+                                                               valorAPagar = ( ( minutosACobrar - 60 ) * 0.2 ) + 10;
+                                                      }
+
+                                             } else if ( rs.getString("tipo_vehiculo").equals("Motocicleta") ) {
+                                                      if ( minutosACobrar < 60 ) {
+                                                               valorAPagar = 5; //Precio a pagar antes de 1 hora
+                                                      } else {
+                                                               valorAPagar = ( ( minutosACobrar - 60 ) * 0.1 ) + 5;
+                                                      }
+                                             }
+
+                                             //FECHA Y HORA ACTUAL
+                                             String fecha = dateFormat.format(date);
+                                             jLabel_hora_salida.setText(fecha);
+                                             jLabel_valor_pagar.setText("$ " + valorAPagar);
+
+                                             if ( estado.equalsIgnoreCase("EGRESADO") ) {
+                                                      jButton_retirar.setEnabled(false);
+                                                      jLabel_info.setVisible(true);
+                                                      jLabel_hora_salida.setText(salida);
+                                                      jLabel_valor_pagar.setText(String.valueOf(valor));
+                                             } else {
+                                                      jButton_retirar.setEnabled(true);
+                                                      jLabel_info.setVisible(false);
+                                             }
+
+                                    } else {
+                                             JOptionPane.showMessageDialog(null, "Placa no registrada");
+                                             jLabel_propietario.setText("");
+                                             jLabel_hora_entrada.setText("00:00:00");
+                                             jLabel_hora_salida.setText("00:00:00");
+                                             jLabel_valor_pagar.setText("$ 0.00");
+                                    }
+
+                           } catch ( SQLException e ) {
+                                    System.out.println("ERROR AL BUSCAR DATOS DE VEHICULO INGRESADO");
+                           } catch ( ParseException ex ) {
+                                    Logger.getLogger(FormMenu.class.getName()).log(Level.SEVERE, null, ex);
+                           }
+
+                  }
+         }
 }
